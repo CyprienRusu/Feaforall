@@ -1,0 +1,129 @@
+ ...............................................................................
+ .        Begin    PZFlex  processing at Wed Aug 28 17:29:30 2019              .
+ ...............................................................................
+ .        Platform: WINEM64T     Precision: single                             .
+ .        Release:  FLEX_v1.4.1                                                .
+ .        Model verification reduced edition                                   .
+ ...............................................................................
+ .        Copyright 1984-2019 by OnScale.  All rights reserved.                .
+ ...............................................................................
+ .        Windows executable: c:\Program Files\OnScale\Flex\Programs\flexp_s.exe                                                                                                                                                                                                                  
+ ...............................................................................
+ .        Username: cypri        Machine: cyprien-dell                         .
+ ...............................................................................
+ .        Defaults file: C:\Users\cypri\Flex.defaultsx                         .
+                    ****Using Flex.key licensing
+ ...............................................................................
+  
+     Memory allocation:
+     Numeric   data-       100 million  words (       400 Mbyte)
+     Character data-       100 thousand words (         2 Mbyte)
+  
+          current  definition of box                  (  real   ) =  0.2000000E-01
+          current  definition of x1                   (  real   ) =  0.5000000    
+          current  definition of x2                   (  real   ) =  0.5000000    
+          current  definition of idx                  ( integer ) =         3
+          current  definition of y1                   (  real   ) =  0.5000000    
+          current  definition of y2                   (  real   ) =  0.5000000    
+          current  definition of jdx                  ( integer ) =         3
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- grid $i$idx $j$jdx
+
+     grid geometry is 2-dimensional
+     constraint relations are pstn
+
+
+                          i          j          k        total
+                   -----   -----   -----      -----
+     grid nodes   -      51 x       51 x        1 =       2601
+
+     grid elements-      50 x       50 x        1 =       2500
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- geom
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  xcrd $x1 $x$idx
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  ycrd $y1 $y$jdx
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  end
+
+     the current model consist of:
+          * a standard partition which contains no skewed elements
+
+     x node coordinates - minimum=   0.000000    
+                          maximum=   1.000000    
+
+     x  element spacing - minimum=  0.1999998E-01
+                          maximum=  0.2000004E-01
+
+     y node coordinates - minimum=   0.000000    
+                          maximum=   1.000000    
+
+     y  element spacing - minimum=  0.1999998E-01
+                          maximum=  0.2000004E-01
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- matr
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  prop steel 7700 200e9 80e9
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  copy steel steel2
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  end
+
+
+                            elas material properties
+     --------------------------------------------------------------------------------
+
+
+     parm                steel               steel2
+     ---- -------------------- --------------------
+   1 rho          7700.000             7700.000    
+   2 bulk        0.2000000E+12        0.2000000E+12
+   3 shr         0.8000000E+11        0.8000000E+11
+   4 hrgl        0.1000000E-01        0.1000000E-01
+   7 ldmp         0.000000             0.000000    
+   8 qdmp         0.000000             0.000000    
+      cp          6310.851             6310.851    
+      cs          3223.292             3223.292    
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- site
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  regn steel
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  regn steel2 $i1 $i2 $j1 $j2
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  end
+
+     Model contains the following continuum elements:
+
+     material   elements        Volume
+     steel          1875       7.5000936E-01
+     steel2          625       2.5000170E-01
+     void              0       0.0000000E+00
+
+     Bounding Box XYZ
+     material   xmin           xmax           ymin           ymax           zmin           zmax
+     steel      0.0000000E+00  1.0000000E+00  0.0000000E+00  1.0000000E+00  0.0000000E+00  0.0000000E+00
+     steel2     0.0000000E+00  5.0000000E-01  0.0000000E+00  5.0000000E-01  0.0000000E+00  0.0000000E+00
+
+     Bounding Box IJK
+     material            imin           imax           jmin           jmax           kmin           kmax
+     steel                  1             51              1             51              0              0
+     steel2                 1             26              1             26              0              0
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- grph
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  type standard
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  line on
+
+     opening X11 graphics station
+     screen resolution          xmax=1920 ymax=1080
+     window resolution (pixels) xmax=1616 ymax= 987
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  plot matr
+ plot command executed
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  end
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- term

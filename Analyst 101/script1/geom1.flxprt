@@ -1,0 +1,121 @@
+ ...............................................................................
+ .        Begin    PZFlex  processing at Wed Aug 28 11:18:10 2019              .
+ ...............................................................................
+ .        Platform: WINEM64T     Precision: single                             .
+ .        Release:  FLEX_v1.4.1                                                .
+ .        Model verification reduced edition                                   .
+ ...............................................................................
+ .        Copyright 1984-2019 by OnScale.  All rights reserved.                .
+ ...............................................................................
+ .        Windows executable: c:\Program Files\OnScale\Flex\Programs\flexp_s.exe                                                                                                                                                                                                                  
+ ...............................................................................
+ .        Username: cypri        Machine: cyprien-dell                         .
+ ...............................................................................
+ .        Defaults file: C:\Users\cypri\Flex.defaultsx                         .
+                    ****Using Flex.key licensing
+ ...............................................................................
+  
+     Memory allocation:
+     Numeric   data-       100 million  words (       400 Mbyte)
+     Character data-       100 thousand words (         2 Mbyte)
+  
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- grid 20 20
+
+     grid geometry is 2-dimensional
+     constraint relations are pstn
+
+
+                          i          j          k        total
+                   -----   -----   -----      -----
+     grid nodes   -      20 x       20 x        1 =        400
+
+     grid elements-      19 x       19 x        1 =        361
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- geom
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  xcrd 0. 1.
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  ycrd 0. 1.
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- matr
+     *end*     subcommand generated
+
+     the current model consist of:
+          * a standard partition which contains no skewed elements
+
+     x node coordinates - minimum=   0.000000    
+                          maximum=   1.000000    
+
+     x  element spacing - minimum=  0.5263156E-01
+                          maximum=  0.5263162E-01
+
+     y node coordinates - minimum=   0.000000    
+                          maximum=   1.000000    
+
+     y  element spacing - minimum=  0.5263156E-01
+                          maximum=  0.5263162E-01
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  prop steel 7700. 160.e9 80.e9
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  copy steel steel2
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  end
+
+
+                            elas material properties
+     --------------------------------------------------------------------------------
+
+
+     parm                steel               steel2
+     ---- -------------------- --------------------
+   1 rho          7700.000             7700.000    
+   2 bulk        0.1600000E+12        0.1600000E+12
+   3 shr         0.8000000E+11        0.8000000E+11
+   4 hrgl        0.1000000E-01        0.1000000E-01
+   7 ldmp         0.000000             0.000000    
+   8 qdmp         0.000000             0.000000    
+      cp          5884.899             5884.899    
+      cs          3223.292             3223.292    
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- site
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  regn steel
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  regn steel2 5 10 5 10
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  end
+
+     Model contains the following continuum elements:
+
+     material   elements        Volume
+     steel           336       9.3074608E-01
+     steel2           25       6.9252081E-02
+     void              0       0.0000000E+00
+
+     Bounding Box XYZ
+     material   xmin           xmax           ymin           ymax           zmin           zmax
+     steel      0.0000000E+00  1.0000000E+00  0.0000000E+00  1.0000000E+00  0.0000000E+00  0.0000000E+00
+     steel2     2.1052632E-01  4.7368422E-01  2.1052632E-01  4.7368422E-01  0.0000000E+00  0.0000000E+00
+
+     Bounding Box IJK
+     material            imin           imax           jmin           jmax           kmin           kmax
+     steel                  1             20              1             20              0              0
+     steel2                 5             10              5             10              0              0
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- grph
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  type standard
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  line on
+
+     opening X11 graphics station
+     screen resolution          xmax=1920 ymax=1080
+     window resolution (pixels) xmax=1616 ymax= 987
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  plot matr
+ plot command executed
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  end
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- term

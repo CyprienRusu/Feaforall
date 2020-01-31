@@ -1,0 +1,22 @@
+grid 400 400
+
+geom
+	xcrd 0 0.1
+	ycrd 0 0.1
+	end
+
+symb #read mymaterials.prjmat
+	
+site 
+	regn steel
+	circle2d alum 0.05 0.05 0.03
+	end
+
+grph
+	type standard
+	line on
+	plot matr
+	end
+
+term
+

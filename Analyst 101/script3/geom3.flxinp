@@ -1,0 +1,43 @@
+
+symb box = 0.02
+
+symb x1 = 0.5
+symb x2 = 0.5
+symb #keycord x 1 0 $x1 $x2
+symb #get { idx } rootmax x
+
+symb #keyindx i 1 $idx 1 $box
+
+symb y1 = 0.5
+symb y2 = 0.5
+symb #keycord y 1 0 $y1 $y2
+symb #get { jdx } rootmax y
+
+symb #keyindx j 1 $jdx 1 $box
+
+
+grid $i$idx $j$jdx
+
+
+geom
+	xcrd $x1 $x$idx
+	ycrd $y1 $y$jdx
+	end
+
+matr 
+	prop steel 7700 200e9 80e9
+	copy steel steel2
+	end
+
+site
+	regn steel
+	regn steel2 $i1 $i2 $j1 $j2
+	end
+
+grph
+	type standard
+	line on
+	plot matr
+	end
+
+term

@@ -1,0 +1,24 @@
+grid 20 20
+
+geom
+	xcrd 0. 1.
+	ycrd 0. 1.
+
+matr 
+	prop steel 7700. 160.e9 80.e9
+	copy steel steel2
+	end
+
+site 
+	regn steel
+	regn steel2 5 10 5 10
+	end
+
+grph 
+	type standard
+	line on
+	plot matr
+	
+	end
+
+term

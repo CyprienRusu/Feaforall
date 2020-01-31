@@ -1,0 +1,290 @@
+ ...............................................................................
+ .        Begin    PZFlex  processing at Wed Aug 28 18:56:20 2019              .
+ ...............................................................................
+ .        Platform: WINEM64T     Precision: single                             .
+ .        Release:  FLEX_v1.4.1                                                .
+ .        Model verification reduced edition                                   .
+ ...............................................................................
+ .        Copyright 1984-2019 by OnScale.  All rights reserved.                .
+ ...............................................................................
+ .        Windows executable: c:\Program Files\OnScale\Flex\Programs\flexp_s.exe                                                                                                                                                                                                                  
+ ...............................................................................
+ .        Username: cypri        Machine: cyprien-dell                         .
+ ...............................................................................
+ .        Defaults file: C:\Users\cypri\Flex.defaultsx                         .
+                    ****Using Flex.key licensing
+ ...............................................................................
+  
+     Memory allocation:
+     Numeric   data-       100 million  words (       400 Mbyte)
+     Character data-       100 thousand words (         2 Mbyte)
+  
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- grid 400 400
+
+     grid geometry is 2-dimensional
+     constraint relations are pstn
+
+
+                          i          j          k        total
+                   -----   -----   -----      -----
+     grid nodes   -     400 x      400 x        1 =     160000
+
+     grid elements-     399 x      399 x        1 =     159201
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- geom
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  xcrd 0 0.1
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  ycrd 0 0.1
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  end
+
+     the current model consist of:
+          * a standard partition which contains no skewed elements
+
+     x node coordinates - minimum=   0.000000    
+                          maximum=  0.1000000    
+
+     x  element spacing - minimum=  0.2506226E-03
+                          maximum=  0.2506301E-03
+
+     y node coordinates - minimum=   0.000000    
+                          maximum=  0.1000000    
+
+     y  element spacing - minimum=  0.2506226E-03
+                          maximum=  0.2506301E-03
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- c --------------------------------------------------------------
+ input- c                   Project Material List
+ input- c --------------------------------------------------------------
+ input- c -------------------------------------------------------------------------
+ input- c Global variables used in all the material definitions
+ input- c -------------------------------------------------------------------------
+ input- c
+          current  definition of epvacm               (  real   ) =  0.8854000E-11
+          current  definition of freqdamp             (  real   ) =   1000000.    
+          current  definition of rmu0                 (  real   ) =  0.1256600E-05
+ input- c
+ input- c -------------------------------------------------------------------------
+ input- c    Now define the axis transformation - only posx used in this file
+ input- c -------------------------------------------------------------------------
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- axis
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-      form vctr
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-      defn posx car2 0. 0. 0.    1.  0.  0.   0. 1. 0.
+     axis definition: posx                    type: car2
+
+                                x              y              z
+             origin:        0.000000       0.000000       0.000000    
+     xbar direction:        0.000000       1.000000       0.000000    
+     ybar direction:        0.000000       0.000000       1.000000    
+     zbar direction:        1.000000       0.000000       0.000000    
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-      defn negx car2 0. 0. 0.   -1.  0.  0.   0. 1. 0.
+     axis definition: negx                    type: car2
+
+                                x              y              z
+             origin:        0.000000       0.000000       0.000000    
+     xbar direction:        0.000000       1.000000       0.000000    
+     ybar direction:        0.000000       0.000000      -1.000000    
+     zbar direction:       -1.000000       0.000000       0.000000    
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-      defn posy car2 0. 0. 0.    0.  1.  0.   0. 0. 1.
+     axis definition: posy                    type: car2
+
+                                x              y              z
+             origin:        0.000000       0.000000       0.000000    
+     xbar direction:        0.000000       0.000000       1.000000    
+     ybar direction:        1.000000       0.000000       0.000000    
+     zbar direction:        0.000000       1.000000       0.000000    
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-      defn negy car2 0. 0. 0.    0. -1.  0.   0. 0. 1.
+     axis definition: negy                    type: car2
+
+                                x              y              z
+             origin:        0.000000       0.000000       0.000000    
+     xbar direction:        0.000000       0.000000       1.000000    
+     ybar direction:       -1.000000       0.000000       0.000000    
+     zbar direction:        0.000000      -1.000000       0.000000    
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-      defn posz car2 0. 0. 0.    0.  0.  1.   1. 0. 0.
+     axis definition: posz                    type: car2
+
+                                x              y              z
+             origin:        0.000000       0.000000       0.000000    
+     xbar direction:        1.000000       0.000000       0.000000    
+     ybar direction:        0.000000       1.000000       0.000000    
+     zbar direction:        0.000000       0.000000       1.000000    
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-      defn negz car2 0. 0. 0.    0.  0. -1.   1. 0. 0.
+     axis definition: negz                    type: car2
+
+                                x              y              z
+             origin:        0.000000       0.000000       0.000000    
+     xbar direction:        1.000000       0.000000       0.000000    
+     ybar direction:        0.000000      -1.000000       0.000000    
+     zbar direction:        0.000000       0.000000      -1.000000    
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-      end
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- c -------------------------------------------------------------------------
+ input- c    Input material properties to program
+ input- c -------------------------------------------------------------------------
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- matr
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- c --------------------------------------------------------------
+ input- c type : METAL :
+ input- c name : alum :
+ input- c desc : Aluminium (damping v. low) :
+ input- c --------------------------------------------------------------
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  wvsp on
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  type elas
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  prop alum 2690 6306 3114 0.01
+          current  definition of eps                  (  real   ) =   3.100000    
+          current  definition of aeps                 (  real   ) =  0.2744740E-10
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  elec alum $aeps
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- c --------------------------------------------------------------
+ input- c type : METAL :
+ input- c name : steel :
+ input- c desc : Mild Steel , generic :
+ input- c --------------------------------------------------------------
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  wvsp on
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  type elas
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  prop steel 7900 5900 3200 0.01
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-    vdmp steel $freqdamp db 0.3 1.2 1e+6 1 0.01 1
+     
+      Damping Measures at frequency =    1000000.    
+          Dilatational db/unit length =    3.000E+01
+          Dilatational q              =    1.542E+02
+          Dilatational % critical     =    3.243E-01
+          Shear db/unit length        =    1.200E+02
+          Shear q                     =    7.106E+01
+          Shear % critical            =    7.036E-01
+
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  thrm steel 472 49.8 49.8 49.8 1.0 0 0 27
+          current  definition of eps                  (  real   ) =   1.000000    
+          current  definition of aeps                 (  real   ) =  0.8854000E-11
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  elec steel $aeps
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-    elec void $epvacm
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-    end
+
+
+                            elas material properties
+     --------------------------------------------------------------------------------
+
+
+     parm                 alum
+     ---- --------------------
+   1 rho          2690.000    
+   2 bulk        0.7218967E+11
+   3 shr         0.2608492E+11
+   4 hrgl        0.1000000E-01
+   7 ldmp         0.000000    
+   8 qdmp         0.000000    
+elec esxx        0.2744740E-10
+elec esyy        0.2744740E-10
+elec eszz        0.2744740E-10
+elec esyz         0.000000    
+elec esxz         0.000000    
+elec esxy         0.000000    
+      cp          6306.000    
+      cs          3114.000    
+
+
+                            vcap material properties
+     --------------------------------------------------------------------------------
+
+
+     parm                steel
+     ---- --------------------
+   1 rho          7900.000    
+   2 bulk        0.1674119E+12
+   3 shr         0.8205477E+11
+   4 hrgl        0.1000000E-01
+   7 ldmp         0.000000    
+   8 qdmp         0.000000    
+   9 ltyp        -1.000000    
+  10  a           0.000000    
+  11  b           0.000000    
+  12  c           0.000000    
+  13  d           0.000000    
+  14  w           0.000000    
+  15  r           0.000000    
+  16 anon         1.000000    
+  17 geop         0.000000    
+  18 xint         0.000000    
+  19 xntn         0.000000    
+  20 ttyp         0.000000    
+  21 fcut         0.000000    
+  22 elst         0.000000    
+  23 tauv        0.1586491E-06
+  24 taud        0.1547375E-06
+  25 rksf        0.9968219    
+  26 rgsf        0.9722444    
+elec esxx        0.8854000E-11
+elec esyy        0.8854000E-11
+elec eszz        0.8854000E-11
+elec esyz         0.000000    
+elec esxz         0.000000    
+elec esxy         0.000000    
+      cp          5919.483    
+      cs          3222.837    
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- site
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  regn steel
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  circle2d alum 0.05 0.05 0.03
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  end
+
+     Model contains the following continuum elements:
+
+     material   elements        Volume
+     alum          45021       2.8293477E-03
+     steel        114180       7.1769753E-03
+     void              0       0.0000000E+00
+
+     Bounding Box XYZ
+     material   xmin           xmax           ymin           ymax           zmin           zmax
+     alum       2.0050125E-02  7.9949878E-02  2.0050125E-02  7.9949878E-02  0.0000000E+00  0.0000000E+00
+     steel      0.0000000E+00  1.0000000E-01  0.0000000E+00  1.0000000E-01  0.0000000E+00  0.0000000E+00
+
+     Bounding Box IJK
+     material            imin           imax           jmin           jmax           kmin           kmax
+     alum                  81            320             81            320              0              0
+     steel                  1            400              1            400              0              0
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- grph
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  type standard
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  line on
+
+     opening X11 graphics station
+     screen resolution          xmax=1920 ymax=1080
+     window resolution (pixels) xmax=1616 ymax= 987
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  plot matr
+ plot command executed
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input-  end
+            -    -    -    -    -    -    -    -    -    -    -    -    -    -
+ input- term
