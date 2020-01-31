@@ -1,0 +1,19 @@
+mp omp * *
+
+c Create Variables
+
+c Create X-Y-Z Keypoints to accurately model dimensions
+
+c Create Grid
+
+c Map Physical Geometry to Grid of Nodes
+
+c Read Materials from File
+
+c Matr: watr, pmt3
+
+c Allocate materials to grid
+
+c Plot Model
+
+term

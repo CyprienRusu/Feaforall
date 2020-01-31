@@ -1,0 +1,150 @@
+c -------------------------------------------------------------- 
+c                   Project Material List
+c -------------------------------------------------------------- 
+
+
+c -------------------------------------------------------------------------
+c Global variables used in all the material definitions
+c -------------------------------------------------------------------------
+c
+symb epvacm = 8.854e-12               /* dielectric constant for vacumn
+symb freqdamp = 1.e6 if noexist       /* specified frequency for damping model
+symb rmu0 = 1.2566e-6
+
+symb #msg 5
+********************************************************
+Damping matched at $freqdamp Hz
+Redefine variable 'freqdamp' if device centre frequency
+varies significantly from this value
+********************************************************
+
+
+c
+c -------------------------------------------------------------------------
+c    Now define the axis transformation - only posx used in this file
+c -------------------------------------------------------------------------
+
+axis
+     form vctr
+     defn posx car2 0. 0. 0.    1.  0.  0.   0. 1. 0.
+     defn negx car2 0. 0. 0.   -1.  0.  0.   0. 1. 0.
+     defn posy car2 0. 0. 0.    0.  1.  0.   0. 0. 1.
+     defn negy car2 0. 0. 0.    0. -1.  0.   0. 0. 1.
+     defn posz car2 0. 0. 0.    0.  0.  1.   1. 0. 0.
+     defn negz car2 0. 0. 0.    0.  0. -1.   1. 0. 0.
+     end
+
+c -------------------------------------------------------------------------
+c    Input material properties to program
+c -------------------------------------------------------------------------
+
+matr
+
+c -------------------------------------------------------------- 
+c type : PIEZO : 
+c name : pmt3 : 
+c desc : CTS 3203HD : 
+c -------------------------------------------------------------- 
+
+	symb rho  = 7820                    /* density
+	wvsp off 
+	type lean
+
+c    define baseline stiffness coefficients (Constant electric field)
+
+	symb c11 = 1.3745e+11
+	symb c12 = 8.79e+10
+	symb c13 = 9.23e+10
+	symb c14 = 0
+	symb c15 = 0
+	symb c16 = 0
+	symb c22 = 1.3745e+11
+	symb c23 = 9.23e+10
+	symb c24 = 0
+	symb c25 = 0
+	symb c26 = 0
+	symb c33 = 1.2574e+11
+	symb c34 = 0
+	symb c35 = 0
+	symb c36 = 0
+	symb c44 = 2.2279e+10
+	symb c45 = 0
+	symb c46 = 0
+	symb c55 = 2.2279e+10
+	symb c56 = 0
+	symb c66 = 2.4779e+10
+
+	prop pmt3 $rho 
+	$c11     $c12     $c13     $c14    $c15    $c16    $c22
+	$c23     $c24     $c25     $c26    $c33    $c34    $c35
+	$c36     $c44     $c45     $c46    $c55    $c56    $c66
+
+c	define baseline dielectric coefficients
+
+	symb epxx = 1305.8
+	symb epyy = 1305.8
+	symb epzz = 1200.2
+
+c	scale material properties as specified above
+	symb aepxx = $epvacm * $epxx
+	symb aepyy = $epvacm * $epyy
+	symb aepzz = $epvacm * $epzz
+
+	elec pmt3 $aepxx $aepyy $aepzz
+
+c    define baseline piezoelectric coupling coefficients
+
+	symb ex1 = 0			/* coupling constant
+	symb ex2 = 0			/* coupling constant
+	symb ex3 = 0			/* coupling constant
+	symb ex4 = 0			/* coupling constant
+	symb ex5 = 16.054			/* coupling constant
+	symb ex6 = 0			/* coupling constant
+	symb ey1 = 0			/* coupling constant
+	symb ey2 = 0			/* coupling constant
+	symb ey3 = 0			/* coupling constant
+	symb ey4 = 16.054			/* coupling constant
+	symb ey5 = 0			/* coupling constant
+	symb ey6 = 0			/* coupling constant
+	symb ez1 = -9.44			/* coupling constant
+	symb ez2 = -9.44			/* coupling constant
+	symb ez3 = 22.495			/* coupling constant
+	symb ez4 = 0			/* coupling constant
+	symb ez5 = 0			/* coupling constant
+	symb ez6 = 0			/* coupling constant
+
+	piez pmt3 1 1 $ex1 1 2 $ex2 1 3 $ex3 1 4 $ex4 1 5 $ex5 1 6 $ex6 &
+			2 1 $ey1 2 2 $ey2 2 3 $ey3 2 4 $ey4 2 5 $ey5 2 6 $ey6 &
+			3 1 $ez1 3 2 $ez2 3 3 $ez3 3 4 $ez4 3 5 $ez5 3 6 $ez6
+
+	rdmp pmt3 $freqdamp q 90 90 1e+06 * * *
+	axis pmt3 posy   /* relate materials local system to global system
+
+
+c -------------------------------------------------------------- 
+c type : FLUID : 
+c name : watr : 
+c desc : Water at 25C : 
+c -------------------------------------------------------------- 
+
+	wvsp on 
+	type elas 
+	prop watr 1000 1496 0 0.
+	vdmp watr $freqdamp db 0.002 0 1e+06 2 0.01 *
+	thrm watr 4181 0.61 0.61 0.61 1.0 0 0 27
+c	define baseline dielectric coefficients
+
+	symb epxx = 3
+	symb epyy = 3
+	symb epzz = 3
+
+c	scale material properties as specified above
+	symb aepxx = $epvacm * $epxx
+	symb aepyy = $epvacm * $epyy
+	symb aepzz = $epvacm * $epzz
+
+	elec watr $aepxx $aepyy $aepzz
+
+
+	elec void $epvacm
+	end

@@ -1,0 +1,52 @@
+mp omp * *
+
+c Create Variables
+
+symb unit = 1.e-3
+symb xmax = 14. * $unit
+symb ymax = 10. * $unit
+symb box = 0.5 * $unit
+
+c Create X-Y-Z Keypoints to accurately model dimensions
+
+symb #keycord x 1 0.0 $xmax
+symb #get { idx } rootmax x
+
+symb #keycord y 1 0.0 $ymax
+symb #get { jdx } rootmax y
+
+symb #keyindx i 1 $idx 1 $box 1
+symb #keyindx j 1 $jdx 1 $box 1
+
+symb indgrd = $i$idx
+symb jndgrd = $j$jdx
+
+
+c Create Grid
+
+grid $indgrd $jndgrd axiy
+
+c Map Physical Geometry to Grid of Nodes
+
+geom keypnt $idx $jdx
+
+c Read Materials from File
+c Matr: watr, pmt3
+
+symb #read 'mymats.prjmat'
+
+c Allocate materials to grid
+
+site
+	regn watr
+	end
+
+c Plot Model
+
+grph
+	type standard
+	line on
+	plot matr
+	end
+
+term
