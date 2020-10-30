@@ -1,0 +1,83 @@
+DEBUT(LANG='EN')
+
+
+mesh = LIRE_MAILLAGE(identifier=u'0:1',
+                     UNITE=20)
+
+model = AFFE_MODELE(identifier=u'1:1',
+                    AFFE=_F(MODELISATION=('3D', ),
+                            PHENOMENE='THERMIQUE',
+                            TOUT='OUI'),
+                    MAILLAGE=mesh)
+
+Brass = DEFI_MATERIAU(identifier=u'2:1',
+                      THER=_F(LAMBDA=159.0,
+                              RHO_CP=3246120.0))
+
+Alum = DEFI_MATERIAU(identifier=u'3:1',
+                     THER=_F(LAMBDA=200.0,
+                             RHO_CP=2430000.0))
+
+fieldmat = AFFE_MATERIAU(identifier=u'4:1',
+                         AFFE=(_F(GROUP_MA=('GrMesh_1_Volumes', ),
+                                  MATER=(Brass, )),
+                               _F(GROUP_MA=('GrMesh_2_Volumes', ),
+                                  MATER=(Alum, ))),
+                         MODELE=model)
+
+SOURCE_F = DEFI_FONCTION(identifier=u'5:1',
+                         INTERPOL=('LIN', ),
+                         NOM_PARA='INST',
+                         PROL_DROITE='CONSTANT',
+                         PROL_GAUCHE='LINEAIRE',
+                         VALE=(0.0, 0.0, 10.0, 220000000.0))
+
+TIMELIST = DEFI_LIST_REEL(identifier=u'6:1',
+                          DEBUT=0.0,
+                          INTERVALLE=_F(JUSQU_A=1000.0,
+                                        PAS=20.0))
+
+Power = AFFE_CHAR_THER(identifier=u'7:1',
+                       MODELE=model,
+                       SOURCE=_F(GROUP_MA=('GrMesh_2_Volumes', ),
+                                 SOUR=220000000.0))
+
+Convecti = AFFE_CHAR_THER(identifier=u'8:1',
+                          ECHANGE=_F(COEF_H=30.0,
+                                     GROUP_MA=('ConvectionBC', ),
+                                     TEMP_EXT=55.0),
+                          MODELE=model)
+
+contact = AFFE_CHAR_THER(identifier=u'9:1',
+                         LIAISON_MAIL=_F(GROUP_MA_ESCL=('GrMesh_2_Volumes', ),
+                                         GROUP_MA_MAIT=('GrMesh_1_Volumes', )),
+                         MODELE=model)
+
+Power_T = AFFE_CHAR_THER_F(identifier=u'10:1',
+                           MODELE=model,
+                           SOURCE=_F(GROUP_MA=('PowerBC', ),
+                                     SOUR=SOURCE_F))
+
+resther = THER_LINEAIRE(identifier=u'11:1',
+                        CHAM_MATER=fieldmat,
+                        ETAT_INIT=_F(VALE=0.0),
+                        EXCIT=(_F(CHARGE=Convecti),
+                               _F(CHARGE=contact),
+                               _F(CHARGE=Power_T)),
+                        INCREMENT=_F(LIST_INST=TIMELIST),
+                        MODELE=model)
+
+INIT_T = CREA_CHAMP(identifier=u'12:1',
+                    AFFE=_F(NOM_CMP=('TEMP', ),
+                            TOUT='OUI',
+                            VALE=(0.0, )),
+                    MODELE=model,
+                    OPERATION='AFFE',
+                    TYPE_CHAM='NOEU_TEMP_R')
+
+IMPR_RESU(identifier=u'13:1',
+          FORMAT='MED',
+          RESU=_F(RESULTAT=resther),
+          UNITE=80)
+
+FIN()
