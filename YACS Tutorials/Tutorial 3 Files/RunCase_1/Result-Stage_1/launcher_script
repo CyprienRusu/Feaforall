@@ -1,0 +1,2 @@
+#!/bin/bash
+as_run --num_job=2515-0001-cy-VirtualBox export 2> ./logs/stderr_command_salome.log
