@@ -1,0 +1,17 @@
+
+ --------------------------------------------------------------------------------
+ ASTER 13.06.00 CONCEPT reslin CALCULE LE 13/11/2020 A 11:47:57 DE TYPE EVOL_ELAS
+
+
+ ======>
+
+ ------>
+ CHAMP AUX NOEUDS DE NOM SYMBOLIQUE  DEPL                                        
+ NUMERO D'ORDRE: 1 INST:   0.00000000000000E+00                                  
+ 
+ LA VALEUR MAXIMALE DE DX       EST  4.96500489652632E-01 EN    1 NOEUD(S) : N198    
+ LA VALEUR MAXIMALE DE DY       EST  7.24762416666086E-02 EN    1 NOEUD(S) : N6      
+ LA VALEUR MAXIMALE DE DZ       EST  3.24290091825090E-03 EN    1 NOEUD(S) : N385    
+ LA VALEUR MINIMALE DE DX       EST -3.14418830851361E-18 EN    1 NOEUD(S) : N539    
+ LA VALEUR MINIMALE DE DY       EST -7.24762416666506E-02 EN    1 NOEUD(S) : N7      
+ LA VALEUR MINIMALE DE DZ       EST -3.24290091825052E-03 EN    1 NOEUD(S) : N323    
