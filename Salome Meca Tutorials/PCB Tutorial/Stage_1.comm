@@ -1,0 +1,65 @@
+DEBUT(LANG='EN')
+
+mesh = LIRE_MAILLAGE(UNITE=20)
+
+model = AFFE_MODELE(AFFE=_F(MODELISATION=('3D', ),
+                            PHENOMENE='THERMIQUE',
+                            TOUT='OUI'),
+                    MAILLAGE=mesh)
+
+Aluminum = DEFI_MATERIAU(THER=_F(LAMBDA=238.0,
+                                 RHO_CP=2430000.0))
+
+Silicon = DEFI_MATERIAU(THER=_F(LAMBDA=130.0,
+                                RHO_CP=1630000.0))
+
+Glass = DEFI_MATERIAU(THER=_F(LAMBDA=1.4,
+                              RHO_CP=1610000.0))
+
+Grease = DEFI_MATERIAU(THER=_F(LAMBDA=3.0,
+                               RHO_CP=3120000.0))
+
+fieldmat = AFFE_MATERIAU(AFFE=(_F(GROUP_MA=('GrPart14_Volumes', 'GrPart11_Volumes', 'GrPart13_Volumes', 'GrChip_Volumes', 'GrPart12_Volumes'),
+                                  MATER=(Silicon, )),
+                               _F(GROUP_MA=('GrHeatsink_Volumes', ),
+                                  MATER=(Aluminum, )),
+                               _F(GROUP_MA=('GrTIM_Volumes', ),
+                                  MATER=(Grease, )),
+                               _F(GROUP_MA=('GrPCB_Volumes', ),
+                                  MATER=(Glass, ))),
+                         MODELE=model)
+
+load = AFFE_CHAR_THER(ECHANGE=_F(COEF_H=15.0,
+                                 GROUP_MA=('convection', ),
+                                 TEMP_EXT=20.0),
+                      LIAISON_MAIL=(_F(GROUP_MA_ESCL=('GrPart14_Volumes', 'GrPart11_Volumes', 'GrPart13_Volumes', 'GrChip_Volumes', 'GrPart12_Volumes'),
+                                       GROUP_MA_MAIT=('GrPCB_Volumes', )),
+                                    _F(GROUP_MA_ESCL=('GrTIM_Volumes', ),
+                                       GROUP_MA_MAIT=('GrChip_Volumes', )),
+                                    _F(GROUP_MA_ESCL=('GrHeatsink_Volumes', ),
+                                       GROUP_MA_MAIT=('GrTIM_Volumes', ))),
+                      MODELE=model,
+                      SOURCE=(_F(GROUP_MA=('GrPart14_Volumes', ),
+                                 SOUR=2610.0),
+                              _F(GROUP_MA=('GrPart11_Volumes', ),
+                                 SOUR=20900.0),
+                              _F(GROUP_MA=('GrPart12_Volumes', ),
+                                 SOUR=32500.0),
+                              _F(GROUP_MA=('GrPart13_Volumes', ),
+                                 SOUR=9520.0),
+                              _F(GROUP_MA=('GrChip_Volumes', ),
+                                 SOUR=336000.0)))
+
+resther = THER_LINEAIRE(CHAM_MATER=fieldmat,
+                        EXCIT=_F(CHARGE=load),
+                        MODELE=model)
+
+resther = CALC_CHAMP(reuse=resther,
+                     RESULTAT=resther,
+                     THERMIQUE=('FLUX_ELGA', 'FLUX_ELNO', 'FLUX_NOEU'))
+
+IMPR_RESU(FORMAT='MED',
+          RESU=_F(RESULTAT=resther),
+          UNITE=80)
+
+FIN()
