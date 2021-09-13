@@ -1,0 +1,20 @@
+P actions make_etude
+P consbtc yes
+P mem_aster 100
+P memjob 16318464
+P memory_limit 15936.0
+P mode interactif
+P mpi_nbcpu 1
+P mpi_nbnoeud 1
+P origine ASTK 2020.0
+P rep_trav /tmp/cyprien-cyprien-bpro-interactif_24878
+P soumbtc yes
+P time_limit 35996400.0
+P tpsjob 599941
+P version /home/cyprien/dev/15.2/share/aster
+A memjeveux 1992.0
+A tpmax 35996400.0
+F comm /home/cyprien/Desktop/gmsh-tuto/aster-case/simpleplate.comm D  1
+F libr /home/cyprien/Desktop/gmsh-tuto/aster-case/simpleplate.unv D  3
+F libr /home/cyprien/Desktop/gmsh-tuto/aster-case/simpleplate_res.msh R  2
+F mess /home/cyprien/Desktop/gmsh-tuto/aster-case/message R  6

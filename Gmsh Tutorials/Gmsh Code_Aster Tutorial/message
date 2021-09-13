@@ -1,0 +1,517 @@
+
+ La plate-forme utilisée ne permet pas d'avoir accès aux valeurs VmPeak/VmSize.
+
+  Ouverture en écriture du fichier ./vola.1
+
+ <INFO> Démarrage de l'exécution.
+                                                                                
+                                                                                
+              -- CODE_ASTER -- VERSION : EXPLOITATION (stable) --               
+                                                                                
+                     Version 15.2.0 modifiée le 22/10/2020                      
+                 révision bc8cd7a4aae1 - branche 'v15.2_smeca'                  
+                         Copyright EDF R&D 1991 - 2021                          
+                                                                                
+                    Exécution du : Thu Sep  9 15:59:03 2021                     
+                        Nom de la machine : cyprien-bpro                        
+                              Architecture : 64bit                              
+                          Type de processeur : x86_64                           
+Système d'exploitation : Linux-4.15.0-154-generic-x86_64-with-Ubuntu-18.04-bionic
+                        Langue des messages : en (UTF-8)                        
+                                                                                
+                           Version de Python : 3.6.9                            
+                           Version de NumPy : 1.13.3                            
+                           Parallélisme MPI : inactif                           
+                          Parallélisme OpenMP : actif                           
+                        Nombre de processus utilisés : 4                        
+                     Version de la librairie HDF5 : 1.10.3                      
+                      Version de la librairie MED : 4.0.0                       
+                     Version de la librairie MFront : 3.2.1                     
+                     Version de la librairie MUMPS : 5.2.1                      
+                        Librairie PETSc : non disponible                        
+                     Version de la librairie SCOTCH : 6.0.4                     
+
+                 Mémoire limite pour l'exécution : 15936.00 Mo                  
+                reste pour l'allocation dynamique : 15936.00 Mo                 
+                Taille limite des fichiers d'échange : 46.88 Go                 
+                                                                                
+
+.. _stg1_txt112
+----------------------------------------------------------------------------------------------------
+Command #0001 from file '/home/cyprien/dev/15.2/lib/aster/code_aster/Commands/debut.py', line 112:
+DEBUT(DEBUG=_F(HIST_ETAPE='NON',
+               JEVEUX='NON',
+               JXVERI='NON',
+               SDVERI='NON'),
+      IMPR_MACRO='NON',
+      INFO=1,
+      LANG='EN',
+      MEMOIRE=_F(TAILLE_BLOC=800.0,
+                 TAILLE_GROUP_ELEM=1000),
+      MESURE_TEMPS=_F(MOYENNE='NON',
+                      NIVE_DETAIL=1),
+      PAR_LOT='OUI',
+      RESERVE_CPU=_F(BORNE=900))
+
+starting the execution...
+
+ Initial value of maximum time CPU = 35996400 second
+ Valeur of the maximum time CPU placed to the orders = 35995500 second
+ Réserve CPU envisaged = 900 seconds 
+
+  Ouverture en écriture du fichier ./glob.1
+
+  Ouverture en écriture du fichier ./vola.1
+
+  Ouverture en lecture du fichier /home/cyprien/dev/15.2/lib/aster/elem.1
+
+     Nom de la base                          :  ELEMBASE
+     Créée avec la version                   :  15.02.00
+     Nombre d'enregistrements utilisés       :  43
+     Nombre d'enregistrements maximum        :  512
+     Longueur d'enregistrement (octets)      :  819200
+     Nombre d'identificateurs utilisés       :  123
+     Taille maximum du répertoire            :  300
+     Pourcentage d'utilisation du répertoire :  41 %
+
+  Ouverture en lecture du fichier /home/cyprien/dev/15.2/lib/aster/elem.1
+
+
+     Nom de la base                          :  ELEMBASE
+     Nombre d'enregistrements utilisés       :  43
+     Nombre d'enregistrements maximum        :  512
+     Longueur d'enregistrement (octets)      :  819200
+     Nombre total d'accès en lecture         :  61
+     Volume des accès en lecture             :         47.66 Mo.
+     Nombre total d'accès en écriture        :  0
+     Volume des accès en écriture            :          0.00 Mo.
+     Nombre d'identificateurs utilisés       :  123
+     Taille maximum du répertoire            :  300
+     Pourcentage d'utilisation du répertoire :  41 %
+
+ Second reading of the catalogues of the elements made. 
+
+ End of reading (lasted 0.025576 S.)   
+Statistics: user+syst:        0.02s (syst:        0.03s, elaps:        0.04s)
+----------------------------------------------------------------------------------------------------
+
+.. _stg1_txt13
+----------------------------------------------------------------------------------------------------
+Command #0002 from file 'fort.1', line 13:
+mesh = LIRE_MAILLAGE(CREA_GROUP_COUL='NON',
+                     FORMAT='IDEAS',
+                     INFO=1,
+                     UNITE=3,
+                     VERI_MAIL=_F(APLAT=0.001,
+                                  VERIF='OUI'))
+
+
+ no system of coordinated is defined 
+ NOMBRE DE NOEUDS :                  330
+ NOMBRE DE MAILLES :                  616
+Vérification du maillage.
+
+------------ MAILLAGE 00000001 - IMPRESSIONS NIVEAU  1 ------------
+
+         AUTEUR=INTERFACE_IDEAS                 DATE=09/09/2021                 
+
+NOMBRE DE NOEUDS                         330
+
+NOMBRE DE MAILLES                        616
+                              SEG2                   34
+                              TRIA3                 582
+
+NOMBRE DE GROUPES DE NOEUDS                4
+                              Left                                 9
+                              Right                                6
+                              Bottom                              22
+                              plate                              330
+
+NOMBRE DE GROUPES DE MAILLES               4
+                              Left                                 7
+                              Right                                5
+                              Bottom                              21
+                              plate                              582
+
+--------------------------------------------------------------------------------
+
+Result of command #0002 (LIRE_MAILLAGE): mesh ('<00000001>') of type <Mesh>
+Statistics: user+syst:        0.02s (syst:        0.00s, elaps:        0.02s)
+----------------------------------------------------------------------------------------------------
+
+.. _stg1_txt17
+----------------------------------------------------------------------------------------------------
+Command #0006 from file 'fort.1', line 17:
+mesh = MODI_MAILLAGE(INFO=1,
+                     MAILLAGE=mesh,
+                     ORIE_PEAU_2D=_F(GROUP_MA='Right'),
+                     reuse=mesh)
+
+TRAITEMENT DU GROUP_MA: Right                    DE       5 MAILLES
+                              0 MAILLE(S) ONT ETE ORIENTEE(S)
+Result of command #0006 (MODI_MAILLAGE): mesh ('<00000001>') of type <Mesh>
+Statistics: user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)
+----------------------------------------------------------------------------------------------------
+
+.. _stg1_txt22
+----------------------------------------------------------------------------------------------------
+Command #0007 from file 'fort.1', line 22:
+model = AFFE_MODELE(AFFE=_F(MODELISATION='C_PLAN',
+                            PHENOMENE='MECANIQUE',
+                            TOUT='OUI'),
+                    DISTRIBUTION=_F(METHODE='SOUS_DOMAINE',
+                                    PARTITIONNEUR='METIS'),
+                    INFO=1,
+                    MAILLAGE=mesh,
+                    VERI_JACOBIEN='OUI')
+
+Sur les 616 mailles du maillage 00000001, on a demandé l'affectation de 616, on a pu en affecter 616.
+ Modélisation     Formulation      Type maille  Élément fini     Nombre
+ C_PLAN                            TRIA3        MECPTR3          582
+                                   SEG2         MEPLSE2          34
+#2      Calculs elementaires et assemblages               CPU (USER+SYST/SYST/ELAPS):      0.00      0.00      0.00
+Result of command #0007 (AFFE_MODELE): model ('<00000002>') of type <Model>
+Statistics: user+syst:        0.01s (syst:        0.00s, elaps:        0.00s)
+----------------------------------------------------------------------------------------------------
+
+.. _stg1_txt25
+----------------------------------------------------------------------------------------------------
+Command #0008 from file 'fort.1', line 25:
+mater = DEFI_MATERIAU(ELAS=_F(COEF_AMOR=1.0,
+                              E=210000000000.0,
+                              NU=0.3),
+                      INFO=1)
+
+Result of command #0008 (DEFI_MATERIAU): mater ('<00000003>') of type <Material>
+Statistics: user+syst:        0.01s (syst:        0.01s, elaps:        0.00s)
+----------------------------------------------------------------------------------------------------
+
+.. _stg1_txt29
+----------------------------------------------------------------------------------------------------
+Command #0009 from file 'fort.1', line 29:
+materfl = AFFE_MATERIAU(AFFE=_F(MATER=mater,
+                                TOUT='OUI'),
+                        INFO=1,
+                        LIST_NOM_VARC=('TEMP', 'GEOM', 'CORR', 'IRRA', 'HYDR', 'SECH', 'EPSA', 'M_ACIER', 'M_ZIRC', 'NEUT1', 'NEUT2', 'NEUT3', 'PTOT', 'DIVU'),
+                        MODELE=model,
+                        VARC_CORR=_F(CMP_GD='CORR',
+                                     CMP_VARC='CORR',
+                                     GRANDEUR='CORR_R',
+                                     NOM_VARC='CORR'),
+                        VARC_DIVU=_F(CMP_GD='DIVU',
+                                     CMP_VARC='DIVU',
+                                     GRANDEUR='EPSI_R',
+                                     NOM_VARC='DIVU'),
+                        VARC_EPSA=_F(CMP_GD=('EPXX', 'EPYY', 'EPZZ', 'EPXY', 'EPXZ', 'EPYZ'),
+                                     CMP_VARC=('EPSAXX', 'EPSAYY', 'EPSAZZ', 'EPSAXY', 'EPSAXZ', 'EPSAYZ'),
+                                     GRANDEUR='EPSI_R',
+                                     NOM_VARC='EPSA'),
+                        VARC_GEOM=_F(CMP_GD=('X', 'Y', 'Z'),
+                                     CMP_VARC=('X', 'Y', 'Z'),
+                                     GRANDEUR='GEOM_R',
+                                     NOM_VARC='GEOM'),
+                        VARC_HYDR=_F(CMP_GD='HYDR',
+                                     CMP_VARC='HYDR',
+                                     GRANDEUR='HYDR_R',
+                                     NOM_VARC='HYDR'),
+                        VARC_IRRA=_F(CMP_GD='IRRA',
+                                     CMP_VARC='IRRA',
+                                     GRANDEUR='IRRA_R',
+                                     NOM_VARC='IRRA'),
+                        VARC_M_ACIER=_F(CMP_GD=('V1', 'V2', 'V3', 'V4', 'V5', 'V6', 'V7', 'V8', 'V9'),
+                                        CMP_VARC=('PFERRITE', 'PPERLITE', 'PBAINITE', 'PMARTENS', 'PAUSTENI', 'PCOLDSUM', 'TAUSTE', 'TRANSF', 'TACIER'),
+                                        GRANDEUR='VARI_R',
+                                        NOM_VARC='M_ACIER'),
+                        VARC_M_ZIRC=_F(CMP_GD=('V1', 'V2', 'V3', 'V4', 'V5'),
+                                       CMP_VARC=('ALPHPUR', 'ALPHBETA', 'BETA', 'TZIRC', 'TEMPS'),
+                                       GRANDEUR='VARI_R',
+                                       NOM_VARC='M_ZIRC'),
+                        VARC_NEUT1=_F(CMP_GD='X1',
+                                      CMP_VARC='NEUT1',
+                                      GRANDEUR='NEUT_R',
+                                      NOM_VARC='NEUT1'),
+                        VARC_NEUT2=_F(CMP_GD='X1',
+                                      CMP_VARC='NEUT2',
+                                      GRANDEUR='NEUT_R',
+                                      NOM_VARC='NEUT2'),
+                        VARC_NEUT3=_F(CMP_GD='X1',
+                                      CMP_VARC='NEUT3',
+                                      GRANDEUR='NEUT_R',
+                                      NOM_VARC='NEUT3'),
+                        VARC_PTOT=_F(CMP_GD='PTOT',
+                                     CMP_VARC='PTOT',
+                                     GRANDEUR='DEPL_R',
+                                     NOM_VARC='PTOT'),
+                        VARC_SECH=_F(CMP_GD='TEMP',
+                                     CMP_VARC='SECH',
+                                     GRANDEUR='TEMP_R',
+                                     NOM_VARC='SECH'),
+                        VARC_TEMP=_F(CMP_GD=('TEMP', 'TEMP_MIL', 'TEMP_INF', 'TEMP_SUP', 'DTX', 'DTY', 'DTZ'),
+                                     CMP_VARC=('TEMP', 'TEMP_MIL', 'TEMP_INF', 'TEMP_SUP', 'DTX', 'DTY', 'DTZ'),
+                                     GRANDEUR='TEMP_R',
+                                     NOM_VARC='TEMP'))
+
+Result of command #0009 (AFFE_MATERIAU): materfl ('<00000004>') of type <MaterialField>
+Statistics: user+syst:        0.01s (syst:        0.00s, elaps:        0.00s)
+----------------------------------------------------------------------------------------------------
+
+.. _stg1_txt35
+----------------------------------------------------------------------------------------------------
+Command #0010 from file 'fort.1', line 35:
+mecabc = AFFE_CHAR_MECA(DDL_IMPO=(_F(DY=0.0,
+                                     GROUP_MA='Bottom'),
+                                  _F(DX=0.0,
+                                     GROUP_MA='Left')),
+                        DOUBLE_LAGRANGE='OUI',
+                        INFO=1,
+                        MODELE=model,
+                        VERI_NORM='OUI')
+
+Result of command #0010 (AFFE_CHAR_MECA): mecabc ('<00000005>') of type <GenericMechanicalLoad>
+Statistics: user+syst:        0.04s (syst:        0.01s, elaps:        0.01s)
+----------------------------------------------------------------------------------------------------
+
+.. _stg1_txt39
+----------------------------------------------------------------------------------------------------
+Command #0011 from file 'fort.1', line 39:
+mecach = AFFE_CHAR_MECA(DOUBLE_LAGRANGE='OUI',
+                        INFO=1,
+                        MODELE=model,
+                        PRES_REP=_F(GROUP_MA='Right',
+                                    PRES=-100000000.0),
+                        VERI_NORM='OUI')
+
+Result of command #0011 (AFFE_CHAR_MECA): mecach ('<00000006>') of type <GenericMechanicalLoad>
+Statistics: user+syst:        0.02s (syst:        0.00s, elaps:        0.01s)
+----------------------------------------------------------------------------------------------------
+
+.. _stg1_txt44
+----------------------------------------------------------------------------------------------------
+Command #0012 from file 'fort.1', line 44:
+result = MECA_STATIQUE(CHAM_MATER=materfl,
+                       EXCIT=(_F(CHARGE=mecabc,
+                                 TYPE_CHARGE='FIXE_CSTE'),
+                              _F(CHARGE=mecach,
+                                 TYPE_CHARGE='FIXE_CSTE')),
+                       INFO=1,
+                       MODELE=model,
+                       OPTION='SIEF_ELGA',
+                       SOLVEUR=_F(ACCELERATION='AUTO',
+                                  ELIM_LAGR='LAGR2',
+                                  GESTION_MEMOIRE='AUTO',
+                                  LOW_RANK_SEUIL=0.0,
+                                  MATR_DISTRIBUEE='NON',
+                                  METHODE='MUMPS',
+                                  NPREC=8,
+                                  PCENT_PIVOT=20,
+                                  POSTTRAITEMENTS='AUTO',
+                                  PRETRAITEMENTS='AUTO',
+                                  RENUM='AUTO',
+                                  RESI_RELA=1e-06,
+                                  STOP_SINGULIER='OUI',
+                                  TYPE_RESOL='AUTO'))
+
+  Le système linéaire à résoudre a 720 degrés de liberté:
+   - 660 sont des degrés de liberté physiques
+     (ils sont portés par 330 noeuds du maillage)
+   - 60 sont les couples de paramètres de Lagrange associés
+     aux 30 relations linéaires dualisées.
+  La matrice est de taille 720 équations.
+  Elle contient 4844 termes non nuls si elle est symétrique et 8968 termes non nuls si elle n'est pas symétrique.
+  Soit un taux de remplissage de   1.730 %.
+   
+   !-------------------------------------------------------------------------------------------------------------!
+   ! <A> <FACTOR_82>                                                                                             !
+   !                                                                                                             !
+   ! Solveur MUMPS :                                                                                             !
+   !   Les informations concernant la mémoire disponible ne sont pas utilisables.                                !
+   !   Si vous avez choisi le mode GESTION_MEMOIRE='AUTO', par précaution on bascule en mode OUT_OF_CORE.        !
+   !   Si vous avez choisi le mode GESTION_MEMOIRE='EVAL', seules les évaluations des consommations MUMPS        !
+   !      seront pertinentes, les autres chiffres ne seront pas à prendre en compte.                             !
+   !   Si vous avez choisi un autre mode, les vérifications liées aux consommations mémoires seront débranchées. !
+   !                                                                                                             !
+   !                                                                                                             !
+   ! This is a warning. If you do not understand the meaning of this                                             !
+   !  warning, you can obtain unexpected results!                                                                !
+   !-------------------------------------------------------------------------------------------------------------!
+   
+#2      Calculs elementaires et assemblages               CPU (USER+SYST/SYST/ELAPS):      0.01      0.00      0.00
+Result of command #0012 (MECA_STATIQUE): '<0000000e>' of type <ElasticResult>
+Statistics: user+syst:        0.21s (syst:        0.07s, elaps:        0.05s)
+----------------------------------------------------------------------------------------------------
+
+.. _stg1_txt48
+----------------------------------------------------------------------------------------------------
+Command #0014 from file 'fort.1', line 48:
+result = CALC_CHAMP(CRITERE='RELATIF',
+                    CRITERES=('SIEQ_ELGA', 'SIEQ_ELNO', 'SIEQ_NOEU'),
+                    INFO=1,
+                    PRECISION=1e-06,
+                    RESULTAT=result,
+                    reuse=result)
+
+#2      Calculs elementaires et assemblages               CPU (USER+SYST/SYST/ELAPS):      0.04      0.00      0.01
+Result of command #0014 (CALC_CHAMP): result ('<0000000e>') of type <ElasticResult>
+Statistics: user+syst:        0.13s (syst:        0.05s, elaps:        0.02s)
+----------------------------------------------------------------------------------------------------
+
+.. _stg1_txt52
+----------------------------------------------------------------------------------------------------
+Command #0015 from file 'fort.1', line 52:
+IMPR_RESU(FORMAT='GMSH',
+          INFO=1,
+          PROC0='OUI',
+          RESU=_F(RESULTAT=result,
+                  TYPE_CHAM='SCALAIRE'),
+          UNITE=2,
+          VERSION=1.2)
+
+
+ ==== Standard of Aster mesh / Type of mesh GMSH ==== 
+
+  34 elements SEG2 cut out in 1 elements SEG2 has 2 nodes 
+
+  582 elements TRIA3 cut out in 1 elements TRIA3 has 3 nodes 
+Statistics: user+syst:        0.97s (syst:        0.12s, elaps:        0.43s)
+----------------------------------------------------------------------------------------------------
+
+.. _stg1_txt54
+----------------------------------------------------------------------------------------------------
+Command #0016 from file 'fort.1', line 54:
+FIN(FORMAT_HDF='NON',
+    INFO_RESU='OUI',
+    PROC0='OUI',
+    RETASSAGE='NON',
+    STATUT=0)
+
+Saving objects...
+pi                       <class 'float'>
+e                        <class 'float'>
+tau                      <class 'float'>
+inf                      <class 'float'>
+nan                      <class 'float'>
+mesh                     <class 'libaster.Mesh'>
+model                    <class 'libaster.Model'>
+mater                    <class 'libaster.Material'>
+materfl                  <class 'libaster.MaterialField'>
+mecabc                   <class 'libaster.GenericMechanicalLoad'>
+mecach                   <class 'libaster.GenericMechanicalLoad'>
+result                   <class 'libaster.ElasticResult'>
+   
+   !-----------------------------------------------------------------!
+   ! <I> <CATAMESS_89>                                               !
+   !                                                                 !
+   !  List of warnings emitted during the execution of computation.  !
+   !                                                                 !
+   !  Warnings which you chose to ignore of are preceded by (*).     !
+   !  Number of occurrences for each warning:                        !
+   !              FACTOR_82            emitted    1 time             !
+   !-----------------------------------------------------------------!
+   
+ ---------------------------------------------------------------------------
+ Concepts de la base: G
+    Nom       Type                 Taille (Mo)         Nombre      Nombre de
+                                                     d'objets       segments
+    TOTAL                                29.45            237            393
+  
+    00000001   MAILLAGE_SDASTER           0.07             37             66
+    00000002   MODELE_SDASTER             0.04              9             14
+    00000003   MATER_SDASTER              0.00              6              6
+    00000004   CHAM_MATER                 0.00              9             14
+    00000005   CHAR_MECA                  0.04             46             66
+    00000006   CHAR_MECA                  0.00             31             36
+    0000000e   EVOL_ELAS                  0.64             44             55
+    &FOZERO                               0.00              2              2
+    &&_NUM_C                              0.00              1              1
+    &CATA.AC                              0.00              2              4
+    &CATA.CL                              0.61              1              3
+    &CATA.GD                              0.19              4             11
+    &CATA.ME                              0.20              2              4
+    &CATA.OP                              0.31              4             19
+    &CATA.PH                              0.00              1              1
+    &CATA.PR                              0.00              2              4
+    &CATA.TE                             27.22             17             42
+    &CATA.TH                              0.01              2              4
+    &CATA.TM                              0.01              7             11
+    00000008                              0.00              4              4
+    00000011                              0.10              6             26
+ ---------------------------------------------------------------------------
+
+
+     Nom de la base                          :  GLOBALE
+     Nombre d'enregistrements utilisés       :  47
+     Nombre d'enregistrements maximum        :  61440
+     Longueur d'enregistrement (octets)      :  819200
+     Nombre total d'accès en lecture         :  7
+     Volume des accès en lecture             :          5.47 Mo.
+     Nombre total d'accès en écriture        :  63
+     Volume des accès en écriture            :         49.22 Mo.
+     Nombre d'identificateurs utilisés       :  459
+     Taille maximum du répertoire            :  2000
+     Pourcentage d'utilisation du répertoire :  22 %
+
+
+     Nom de la base                          :  VOLATILE
+     Nombre d'enregistrements utilisés       :  3
+     Nombre d'enregistrements maximum        :  61440
+     Longueur d'enregistrement (octets)      :  819200
+     Nombre total d'accès en lecture         :  0
+     Volume des accès en lecture             :          0.00 Mo.
+     Nombre total d'accès en écriture        :  6
+     Volume des accès en écriture            :          4.69 Mo.
+     Nombre d'identificateurs utilisés       :  473
+     Taille maximum du répertoire            :  2000
+     Pourcentage d'utilisation du répertoire :  23 %
+<I> <FIN> ARRET NORMAL DANS "FIN" PAR APPEL A "JEFINI".
+  
+ <I> <FIN> MEMOIRE JEVEUX MINIMALE REQUISE POUR L'EXECUTION :                      35.88 Mo
+ <I> <FIN> MEMOIRE JEVEUX OPTIMALE REQUISE POUR L'EXECUTION :                      45.87 Mo
+  
+ <I>       FERMETURE DES BASES EFFECTUEE
+  
+   STATISTIQUES CONCERNANT L'ALLOCATION DYNAMIQUE :
+     TAILLE CUMULEE MAXIMUM            :                   46  Mo.
+     TAILLE CUMULEE LIBEREE            :                   11  Mo.
+     NOMBRE TOTAL D'ALLOCATIONS        :                51300
+     NOMBRE TOTAL DE LIBERATIONS       :                51280
+     APPELS AU MECANISME DE LIBERATION :                    0
+     TAILLE MEMOIRE CUMULEE RECUPEREE  :                    0  Mo.
+     VOLUME DES LECTURES               :                    0  Mo.
+     VOLUME DES ECRITURES              :                    0  Mo.
+  
+   MEMOIRE JEVEUX MINIMALE REQUISE POUR L'EXECUTION :      35.88 Mo
+     - IMPOSE DE NOMBREUX ACCES DISQUE
+     - RALENTIT LA VITESSE D'EXECUTION
+   MEMOIRE JEVEUX OPTIMALE REQUISE POUR L'EXECUTION :      45.87 Mo
+     - LIMITE LES ACCES DISQUE
+     - AMELIORE LA VITESSE D'EXECUTION
+  
+ <I>       FIN D'EXECUTION LE : JE-09-SEPT-2021 15:59:04
+Signature of pickled file   : fd1eee5c4830e0e0e70d5f37cac69b2deeca81f987574967cd7a9126ef95e385
+Signature of info file      : 50ea522c1923ab235b0aee9a8c23b3a70cfcec2155b544a1a676447206d0e73c
+Signature of Jeveux database: 403aa04b66fd5050f8bd6cd208aadd85192cf1e765cdfa51c0f168b698029d7b
+
+ ********************************************************************************
+ * COMMAND                  :       USER :     SYSTEM :   USER+SYS :    ELAPSED *
+ ********************************************************************************
+ * DEBUT                    :       0.02 :       0.03 :       0.05 :       0.04 *
+ * LIRE_MAILLAGE            :       0.02 :       0.00 :       0.02 :       0.02 *
+ * MODI_MAILLAGE            :       0.01 :       0.00 :       0.01 :       0.01 *
+ * AFFE_MODELE              :       0.01 :       0.00 :       0.01 :       0.00 *
+ * DEFI_MATERIAU            :       0.01 :       0.01 :       0.02 :       0.00 *
+ * AFFE_MATERIAU            :       0.01 :       0.00 :       0.01 :       0.00 *
+ * AFFE_CHAR_MECA           :       0.04 :       0.01 :       0.05 :       0.01 *
+ * AFFE_CHAR_MECA           :       0.02 :       0.00 :       0.02 :       0.01 *
+ * MECA_STATIQUE            :       0.21 :       0.07 :       0.28 :       0.05 *
+ * CALC_CHAMP               :       0.13 :       0.05 :       0.18 :       0.02 *
+ * IMPR_RESU                :       0.97 :       0.12 :       1.09 :       0.43 *
+ * FIN                      :       0.02 :       0.03 :       0.05 :       0.05 *
+ *  . check syntax          :       0.07 :       0.04 :       0.11 :       0.04 *
+ *  . fortran               :       1.21 :       0.21 :       1.42 :       0.54 *
+ ********************************************************************************
+ * TOTAL_JOB                :       1.48 :       0.32 :       1.80 :       0.66 *
+ ********************************************************************************
+
+Statistics: user+syst:        0.02s (syst:        0.03s, elaps:        0.05s)
+----------------------------------------------------------------------------------------------------
+EXECUTION_CODE_ASTER_EXIT_24878=0
