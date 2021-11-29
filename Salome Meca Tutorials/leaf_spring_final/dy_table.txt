@@ -1,0 +1,42 @@
+#
+#--------------------------------------------------------------------------------
+##ASTER 14.08.00 CONCEPT OBSV CALCULE LE 24/11/2021 A 17:07:13 DE TYPE            
+#TABLE_SDASTER                                                                   
+NOM_OBSERVATION  TYPE_OBJET       NUME_REUSE   NUME_OBSE    INST         NOM_CHAM         EVAL_CHAM NOM_CMP  NOEUD    VALE        
+OBSERVATION_1    R                           0            1  0.00000E+00 DEPL              VALE     DY       N377      0.00000E+00
+OBSERVATION_1    R                           0            2  8.33333E-03 DEPL              VALE     DY       N377      5.69555E-09
+OBSERVATION_1    R                           0            3  1.66667E-02 DEPL              VALE     DY       N377      1.14346E-08
+OBSERVATION_1    R                           0            4  2.50000E-02 DEPL              VALE     DY       N377      1.71722E-08
+OBSERVATION_1    R                           0            5  2.50000E-02 DEPL              VALE     DY       N377      1.61653E-08
+OBSERVATION_1    R                           0            6  3.33333E-02 DEPL              VALE     DY       N377      2.15646E-08
+OBSERVATION_1    R                           0            7  3.33333E-02 DEPL              VALE     DY       N377      1.97598E-08
+OBSERVATION_1    R                           0            8  4.16667E-02 DEPL              VALE     DY       N377      2.47105E-08
+OBSERVATION_1    R                           0            9  5.00000E-02 DEPL              VALE     DY       N377      2.96617E-08
+OBSERVATION_1    R                           0           10  5.00000E-02 DEPL              VALE     DY       N377      3.02722E-08
+OBSERVATION_1    R                           0           11  5.83333E-02 DEPL              VALE     DY       N377      3.53249E-08
+OBSERVATION_1    R                           0           12  6.66667E-02 DEPL              VALE     DY       N377      4.03780E-08
+OBSERVATION_1    R                           0           13  7.50000E-02 DEPL              VALE     DY       N377      4.54313E-08
+OBSERVATION_1    R                           0           14  8.33333E-02 DEPL              VALE     DY       N377      5.04848E-08
+OBSERVATION_1    R                           0           15  9.16667E-02 DEPL              VALE     DY       N377      5.55385E-08
+OBSERVATION_1    R                           0           16  9.16667E-02 DEPL              VALE     DY       N377      5.55940E-08
+OBSERVATION_1    R                           0           17  1.00000E-01 DEPL              VALE     DY       N377      6.06524E-08
+OBSERVATION_1    R                           0           18  1.08333E-01 DEPL              VALE     DY       N377      6.57109E-08
+OBSERVATION_1    R                           0           19  1.16667E-01 DEPL              VALE     DY       N377      7.07695E-08
+OBSERVATION_1    R                           0           20  1.25000E-01 DEPL              VALE     DY       N377      7.58281E-08
+OBSERVATION_1    R                           0           21  1.33333E-01 DEPL              VALE     DY       N377      8.08866E-08
+OBSERVATION_1    R                           0           22  1.41667E-01 DEPL              VALE     DY       N377      8.58777E-08
+OBSERVATION_1    R                           0           23  1.50000E-01 DEPL              VALE     DY       N377      9.07496E-08
+OBSERVATION_1    R                           0           24  1.58333E-01 DEPL              VALE     DY       N377      9.53433E-08
+OBSERVATION_1    R                           0           25  1.66667E-01 DEPL              VALE     DY       N377      9.95668E-08
+OBSERVATION_1    R                           0           26  1.75000E-01 DEPL              VALE     DY       N377      1.03401E-07
+OBSERVATION_1    R                           0           27  1.83333E-01 DEPL              VALE     DY       N377      1.06944E-07
+OBSERVATION_1    R                           0           28  1.91667E-01 DEPL              VALE     DY       N377      1.10064E-07
+OBSERVATION_1    R                           0           29  1.91667E-01 DEPL              VALE     DY       N377      1.07927E-07
+OBSERVATION_1    R                           0           30  2.00000E-01 DEPL              VALE     DY       N377      1.10672E-07
+OBSERVATION_1    R                           0           31  2.08333E-01 DEPL              VALE     DY       N377      1.13199E-07
+OBSERVATION_1    R                           0           32  2.16667E-01 DEPL              VALE     DY       N377      1.15558E-07
+OBSERVATION_1    R                           0           33  2.25000E-01 DEPL              VALE     DY       N377      1.17727E-07
+OBSERVATION_1    R                           0           34  2.33333E-01 DEPL              VALE     DY       N377      1.19677E-07
+OBSERVATION_1    R                           0           35  2.41667E-01 DEPL              VALE     DY       N377      1.21353E-07
+OBSERVATION_1    R                           0           36  2.50000E-01 DEPL              VALE     DY       N377      1.22897E-07
+

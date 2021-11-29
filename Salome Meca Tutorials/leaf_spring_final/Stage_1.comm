@@ -1,0 +1,132 @@
+DEBUT(LANG='FR')
+
+mesh = LIRE_MAILLAGE(FORMAT='MED',
+                     UNITE=20)
+
+mesh = MODI_MAILLAGE(reuse=mesh,
+                     MAILLAGE=mesh,
+                     ORIE_PEAU_3D=_F(GROUP_MA=('spring_contact', )))
+
+model = AFFE_MODELE(AFFE=(_F(GROUP_MA=('spring_vol', ),
+                             MODELISATION=('3D', ),
+                             PHENOMENE='MECANIQUE'),
+                          _F(GROUP_MA=('plate_vol', ),
+                             MODELISATION=('3D', ),
+                             PHENOMENE='MECANIQUE')),
+                    MAILLAGE=mesh)
+
+RAMPE = DEFI_FONCTION(NOM_PARA='INST',
+                      VALE=(0.0, 0.0, 1.0, 1.0))
+
+listr = DEFI_LIST_REEL(DEBUT=0.0,
+                       INTERVALLE=(_F(JUSQU_A=0.25,
+                                      NOMBRE=30),
+                                   _F(JUSQU_A=0.5,
+                                      NOMBRE=60),
+                                   _F(JUSQU_A=1.0,
+                                      NOMBRE=100)))
+
+hardenf = DEFI_FONCTION(ABSCISSE=(0.0011, 0.004, 0.0084, 0.0181, 0.0317, 0.0457, 0.065, 0.0827, 0.1045, 0.1252),
+                        INTERPOL=('LIN', ),
+                        NOM_PARA='EPSI',
+                        ORDONNEE=(264700000.0, 264700000.0, 276140000.0, 332960000.0, 383160000.0, 414510000.0, 439140000.0, 451170000.0, 458310000.0, 460500000.0),
+                        PROL_DROITE='LINEAIRE',
+                        PROL_GAUCHE='LINEAIRE')
+
+steel = DEFI_MATERIAU(ELAS=_F(E=24060000000.0,
+                              NU=0.3),
+                      TRACTION=_F(SIGM=hardenf))
+
+rigid = DEFI_MATERIAU(ELAS=_F(E=26000000000000.0,
+                              NU=0.3),
+                      TRACTION=_F(SIGM=hardenf))
+
+materfl = AFFE_MATERIAU(AFFE=(_F(GROUP_MA=('spring_vol', ),
+                                 MATER=(steel, )),
+                              _F(GROUP_MA=('plate_vol', ),
+                                 MATER=(rigid, ))),
+                        MODELE=model)
+
+times = DEFI_LIST_INST(DEFI_LIST=_F(LIST_INST=listr),
+                       ECHEC=(_F(ACTION='DECOUPE',
+                                 EVENEMENT='ERREUR',
+                                 SUBD_NIVEAU=3),
+                              _F(ACTION='ADAPT_COEF_PENA',
+                                 COEF_MAXI=1000000000000.0,
+                                 EVENEMENT='INTERPENETRATION',
+                                 PENE_MAXI=1e-05)))
+
+storing = DEFI_LIST_REEL(DEBUT=0.0,
+                         INTERVALLE=_F(JUSQU_A=1.0,
+                                       NOMBRE=20))
+
+mecabc = AFFE_CHAR_MECA(DDL_IMPO=_F(DX=0.0,
+                                    DY=0.0,
+                                    DZ=0.0,
+                                    GROUP_MA=('fix_plate', )),
+                        MODELE=model)
+
+mecach = AFFE_CHAR_MECA(DDL_IMPO=_F(DX=0.0,
+                                    DY=0.0,
+                                    DZ=-0.004,
+                                    GROUP_MA=('load_face', )),
+                        MODELE=model)
+
+contact = DEFI_CONTACT(FORMULATION='DISCRETE',
+                       FROTTEMENT='SANS',
+                       MODELE=model,
+                       ZONE=_F(ALGO_CONT='PENALISATION',
+                               E_N=2000000.0,
+                               GROUP_MA_ESCL=('spring_contact', ),
+                               GROUP_MA_MAIT=('plane_contact', )))
+
+resnonl = STAT_NON_LINE(ARCHIVAGE=_F(LIST_INST=storing),
+                        CHAM_MATER=materfl,
+                        COMPORTEMENT=_F(DEFORMATION='SIMO_MIEHE',
+                                        RELATION='VMIS_ISOT_TRAC'),
+                        CONTACT=contact,
+                        CONVERGENCE=_F(ITER_GLOB_MAXI=40),
+                        EXCIT=(_F(CHARGE=mecabc,
+                                  FONC_MULT=RAMPE),
+                               _F(CHARGE=mecach,
+                                  FONC_MULT=RAMPE)),
+                        INCREMENT=_F(LIST_INST=times),
+                        METHODE='NEWTON',
+                        MODELE=model,
+                        NEWTON=_F(MATRICE='TANGENTE',
+                                  MATR_RIGI_SYME='NON',
+                                  PREDICTION='ELASTIQUE',
+                                  REAC_INCR=1),
+                        OBSERVATION=_F(EVAL_CHAM='VALE',
+                                       GROUP_NO=('A1', ),
+                                       NOM_CHAM='DEPL',
+                                       NOM_CMP=('DY', )),
+                        SOLVEUR=_F(),
+                        SUIVI_DDL=_F(EVAL_CHAM='VALE',
+                                     GROUP_NO=('A1', ),
+                                     NOM_CHAM='DEPL',
+                                     NOM_CMP=('DY', )))
+
+resnonl = CALC_CHAMP(reuse=resnonl,
+                     CRITERES=('SIEQ_ELGA', 'SIEQ_ELNO', 'SIEQ_NOEU'),
+                     DEFORMATION=('EPSI_ELGA', 'EPSI_ELNO', 'EPSI_NOEU'),
+                     RESULTAT=resnonl)
+
+DEPL_A1 = POST_RELEVE_T(ACTION=_F(GROUP_NO=('A1', ),
+                                  INTITULE='DY extraction',
+                                  NOM_CHAM='DEPL',
+                                  NOM_CMP=('DY', ),
+                                  OPERATION=('EXTRACTION', ),
+                                  RESULTAT=resnonl))
+
+IMPR_RESU(FORMAT='MED',
+          RESU=_F(RESULTAT=resnonl),
+          UNITE=3)
+
+OBSV = RECU_TABLE(CO=resnonl,
+                  NOM_TABLE='OBSERVATION')
+
+IMPR_TABLE(TABLE=OBSV,
+           UNITE=8)
+
+FIN()
