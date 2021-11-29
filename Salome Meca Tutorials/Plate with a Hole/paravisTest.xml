@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<proc name="newSchema_1">
+   <type name="string" kind="string"/>
+   <struct name="Engines/dataref">
+      <member name="ref" type="string"/>
+   </struct>
+   <type name="bool" kind="bool"/>
+   <sequence name="boolvec" content="bool"/>
+   <type name="double" kind="double"/>
+   <sequence name="dblevec" content="double"/>
+   <objref name="file" id="file"/>
+   <type name="int" kind="int"/>
+   <sequence name="intvec" content="int"/>
+   <struct name="stringpair">
+      <member name="name" type="string"/>
+      <member name="value" type="string"/>
+   </struct>
+   <sequence name="propvec" content="stringpair"/>
+   <objref name="pyobj" id="python:obj:1.0"/>
+   <sequence name="seqboolvec" content="boolvec"/>
+   <sequence name="seqdblevec" content="dblevec"/>
+   <sequence name="seqintvec" content="intvec"/>
+   <sequence name="seqpyobj" content="pyobj"/>
+   <sequence name="stringvec" content="string"/>
+   <sequence name="seqstringvec" content="stringvec"/>
+   <container name="DefaultContainer">
+      <property name="container_kind" value="Salome"/>
+      <property name="attached_on_cloning" value="0"/>
+      <property name="container_name" value="FactoryServer"/>
+      <property name="name" value="localhost"/>
+   </container>
+   <inline name="PyScript0">
+      <script><code><![CDATA[import pvsimple
+pvsimple.ShowParaviewView()
+# trace generated using paraview version 5.6.0-RC1
+
+#### import the simple module from the paraview
+from pvsimple import *
+#### disable automatic camera reset on 'Show'
+pvsimple._DisableFirstRenderCameraReset()
+
+# create a new 'CSV Reader'
+mesh_convergencetxt = CSVReader(FileName=['/home/cyprien/Desktop/plate_hole/mesh_convergence.txt'])
+
+# Create a new 'SpreadSheet View'
+spreadSheetView1 = CreateView('SpreadSheetView')
+spreadSheetView1.ColumnToSort = ''
+spreadSheetView1.BlockSize = 1024
+# uncomment following to set a specific view size
+spreadSheetView1.ViewSize = [400, 400]
+
+# get layout
+layout1 = GetLayout()
+
+# place view in the layout
+layout1.AssignView(2, spreadSheetView1)
+
+# show data in view
+#mesh_convergencetxtDisplay = Show(mesh_convergencetxt, spreadSheetView1)
+
+# update the view to ensure updated data information
+spreadSheetView1.Update()
+
+# create a new 'Plot Data'
+plotData1 = PlotData(Input=mesh_convergencetxt)
+
+# Create a new 'Line Chart View'
+lineChartView1 = CreateView('XYChartView')
+lineChartView1.ViewSize = [766, 417]
+lineChartView1.ChartTitleFontFile = ''
+lineChartView1.LeftAxisTitleFontFile = ''
+lineChartView1.LeftAxisLabelFontFile = ''
+lineChartView1.BottomAxisTitleFontFile = ''
+lineChartView1.BottomAxisLabelFontFile = ''
+lineChartView1.RightAxisLabelFontFile = ''
+lineChartView1.TopAxisTitleFontFile = ''
+lineChartView1.TopAxisLabelFontFile = ''
+
+# place view in the layout
+layout1.AssignView(6, lineChartView1)
+
+# Properties modified on lineChartView1
+lineChartView1.BottomAxisTitle = 'mesh size (mm)'
+
+# Properties modified on lineChartView1
+lineChartView1.LeftAxisTitle = 'Max Von Mises Stress (MPa)'
+
+# save screenshot
+SaveScreenshot('/home/cyprien/Desktop/plate_hole/mesh_convergence2.png', lineChartView1, ImageResolution=[766, 417])
+]]></code></script>
+      <load container="DefaultContainer"/>
+   </inline>
+   <presentation name="PyScript0" x="6" y="34" width="158" height="36" expanded="1" expx="6" expy="34" expWidth="158" expHeight="36" shownState="0"/>
+   <presentation name="__ROOT__" x="0" y="0" width="168" height="74" expanded="1" expx="0" expy="0" expWidth="168" expHeight="74" shownState="0"/>
+</proc>

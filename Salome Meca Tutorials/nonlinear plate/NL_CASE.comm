@@ -1,0 +1,69 @@
+DEBUT(LANG='EN')
+
+mesh = LIRE_MAILLAGE(FORMAT='MED',
+                     UNITE=20)
+
+mesh = MODI_MAILLAGE(reuse=mesh,
+                     MAILLAGE=mesh,
+                     ORIE_PEAU_2D=_F(GROUP_MA=('load_edge', )))
+
+model = AFFE_MODELE(AFFE=_F(MODELISATION=('C_PLAN', ),
+                            PHENOMENE='MECANIQUE',
+                            TOUT='OUI'),
+                    MAILLAGE=mesh)
+
+RAMPE = DEFI_FONCTION(NOM_PARA='INST',
+                      VALE=(0.0, 0.0, 2.0, 2.0, 3.0, 3.0))
+
+L_INST = DEFI_LIST_REEL(DEBUT=0.0,
+                        INTERVALLE=(_F(JUSQU_A=1.0,
+                                       NOMBRE=4),
+                                    _F(JUSQU_A=2.0,
+                                       NOMBRE=3),
+                                    _F(JUSQU_A=3.0,
+                                       NOMBRE=4)))
+
+FSIGM = DEFI_FONCTION(NOM_PARA='EPSI',
+                      PROL_DROITE='LINEAIRE',
+                      PROL_GAUCHE='LINEAIRE',
+                      VALE=(0.002, 420.0, 0.004, 500.0))
+
+mater = DEFI_MATERIAU(ELAS=_F(E=210000.0,
+                              NU=0.3),
+                      TRACTION=_F(SIGM=FSIGM))
+
+materfl = AFFE_MATERIAU(AFFE=_F(MATER=(mater, ),
+                                TOUT='OUI'),
+                        MODELE=model)
+
+mecabc = AFFE_CHAR_MECA(DDL_IMPO=(_F(DY=0.0,
+                                     GROUP_MA=('edge_x', )),
+                                  _F(DX=0.0,
+                                     GROUP_MA=('edge_y', ))),
+                        MODELE=model)
+
+mecach = AFFE_CHAR_MECA(MODELE=model,
+                        PRES_REP=_F(GROUP_MA=('load_edge', ),
+                                    PRES=-100.0))
+
+resnonl = STAT_NON_LINE(CHAM_MATER=materfl,
+                        COMPORTEMENT=_F(DEFORMATION='PETIT',
+                                        RELATION='VMIS_ISOT_TRAC',
+                                        TOUT='OUI'),
+                        EXCIT=(_F(CHARGE=mecabc,
+                                  FONC_MULT=RAMPE),
+                               _F(CHARGE=mecach,
+                                  FONC_MULT=RAMPE)),
+                        INCREMENT=_F(LIST_INST=L_INST),
+                        MODELE=model)
+
+resnonl = CALC_CHAMP(reuse=resnonl,
+                     CRITERES=('SIEQ_ELGA', 'SIEQ_ELNO', 'SIEQ_NOEU'),
+                     DEFORMATION=('EPSI_ELGA', 'EPSI_ELNO', 'EPSI_NOEU'),
+                     RESULTAT=resnonl)
+
+IMPR_RESU(FORMAT='MED',
+          RESU=_F(RESULTAT=resnonl),
+          UNITE=2)
+
+FIN()

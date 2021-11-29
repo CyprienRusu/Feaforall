@@ -1,0 +1,46 @@
+DEBUT(LANG='EN')
+
+
+mesh = LIRE_MAILLAGE(FORMAT='IDEAS',
+                     UNITE=3)
+
+mesh = MODI_MAILLAGE(reuse=mesh,
+                     MAILLAGE=mesh,
+                     ORIE_PEAU_2D=_F(GROUP_MA=('Right', )))
+
+model = AFFE_MODELE(AFFE=_F(MODELISATION=('C_PLAN', ),
+                            PHENOMENE='MECANIQUE',
+                            TOUT='OUI'),
+                    MAILLAGE=mesh)
+
+mater = DEFI_MATERIAU(ELAS=_F(E=210000000000.0,
+                              NU=0.3))
+
+materfl = AFFE_MATERIAU(AFFE=_F(MATER=(mater, ),
+                                TOUT='OUI'),
+                        MODELE=model)
+
+mecabc = AFFE_CHAR_MECA(DDL_IMPO=(_F(DY=0.0,
+                                     GROUP_MA=('Bottom', )),
+                                  _F(DX=0.0,
+                                     GROUP_MA=('Left', ))),
+                        MODELE=model)
+
+mecach = AFFE_CHAR_MECA(MODELE=model,
+                        PRES_REP=_F(GROUP_MA=('Right', ),
+                                    PRES=-100000000.0))
+
+result = MECA_STATIQUE(CHAM_MATER=materfl,
+                       EXCIT=(_F(CHARGE=mecabc),
+                              _F(CHARGE=mecach)),
+                       MODELE=model)
+
+result = CALC_CHAMP(reuse=result,
+                    CRITERES=('SIEQ_ELGA', 'SIEQ_ELNO', 'SIEQ_NOEU'),
+                    RESULTAT=result)
+
+IMPR_RESU(FORMAT='GMSH',
+          RESU=_F(RESULTAT=result),
+          UNITE=2)
+
+FIN()

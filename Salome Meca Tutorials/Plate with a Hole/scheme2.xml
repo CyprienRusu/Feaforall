@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<proc name="newSchema_1">
+   <type name="string" kind="string"/>
+   <struct name="Engines/dataref">
+      <member name="ref" type="string"/>
+   </struct>
+   <type name="bool" kind="bool"/>
+   <sequence name="boolvec" content="bool"/>
+   <type name="double" kind="double"/>
+   <sequence name="dblevec" content="double"/>
+   <objref name="file" id="file"/>
+   <type name="int" kind="int"/>
+   <sequence name="intvec" content="int"/>
+   <struct name="stringpair">
+      <member name="name" type="string"/>
+      <member name="value" type="string"/>
+   </struct>
+   <sequence name="propvec" content="stringpair"/>
+   <objref name="pyobj" id="python:obj:1.0"/>
+   <sequence name="seqboolvec" content="boolvec"/>
+   <sequence name="seqdblevec" content="dblevec"/>
+   <sequence name="seqdouble" content="double"/>
+   <sequence name="seqintvec" content="intvec"/>
+   <sequence name="seqpyobj" content="pyobj"/>
+   <sequence name="stringvec" content="string"/>
+   <sequence name="seqstringvec" content="stringvec"/>
+   <container name="DefaultContainer">
+      <property name="container_kind" value="Salome"/>
+      <property name="attached_on_cloning" value="0"/>
+      <property name="container_name" value="FactoryServer"/>
+      <property name="name" value="localhost"/>
+   </container>
+   <container name="container0">
+      <property name="container_kind" value="Salome"/>
+      <property name="attached_on_cloning" value="0"/>
+   </container>
+   <foreach name="ForEachLoop_double2" nbranch="1" loopWeight="-1" type="double">
+      <bloc name="Bloc3">
+         <inline name="model_generation">
+            <script><code><![CDATA[import sys
+import salome
+
+salome.salome_init()
+import salome_notebook
+notebook = salome_notebook.NoteBook()
+sys.path.insert(0, r'/home/cyprien/Desktop/plate_hole')
+
+###
+### GEOM component
+###
+
+import GEOM
+from salome.geom import geomBuilder
+import math
+import SALOMEDS
+
+
+geompy = geomBuilder.New()
+
+O = geompy.MakeVertex(0, 0, 0)
+OX = geompy.MakeVectorDXDYDZ(1, 0, 0)
+OY = geompy.MakeVectorDXDYDZ(0, 1, 0)
+OZ = geompy.MakeVectorDXDYDZ(0, 0, 1)
+Face_1 = geompy.MakeFaceHW(50, 100, 1)
+geompy.TranslateDXDYDZ(Face_1, 25, 50, 0)
+Disk_1 = geompy.MakeDiskR(20, 1)
+platehole = geompy.MakeCutList(Face_1, [Disk_1], True)
+edge_x = geompy.CreateGroup(platehole, geompy.ShapeType["EDGE"])
+geompy.UnionIDs(edge_x, [10])
+edge_y = geompy.CreateGroup(platehole, geompy.ShapeType["EDGE"])
+geompy.UnionIDs(edge_y, [3])
+load_edge = geompy.CreateGroup(platehole, geompy.ShapeType["EDGE"])
+geompy.UnionIDs(load_edge, [6])
+[edge_x, edge_y, load_edge] = geompy.GetExistingSubObjects(platehole, True)
+[edge_x, edge_y, load_edge] = geompy.GetExistingSubObjects(platehole, True)
+exported = geompy.ExportXAO(platehole, [edge_x, edge_y, load_edge], [], "", "/home/cyprien/Desktop/plate_hole/plate_hole2.xao", "")
+geompy.addToStudy( O, 'O' )
+geompy.addToStudy( OX, 'OX' )
+geompy.addToStudy( OY, 'OY' )
+geompy.addToStudy( OZ, 'OZ' )
+geompy.addToStudy( Face_1, 'Face_1' )
+geompy.addToStudy( Disk_1, 'Disk_1' )
+geompy.addToStudy( platehole, 'platehole' )
+geompy.addToStudyInFather( platehole, edge_x, 'edge_x' )
+geompy.addToStudyInFather( platehole, edge_y, 'edge_y' )
+geompy.addToStudyInFather( platehole, load_edge, 'load_edge' )
+
+###
+### SMESH component
+###
+
+import  SMESH, SALOMEDS
+from salome.smesh import smeshBuilder
+
+smesh = smeshBuilder.New()
+#smesh.SetEnablePublish( False ) # Set to False to avoid publish in study if not needed or in some particular situations:
+                                 # multiples meshes built in parallel, complex and numerous mesh edition (performance)
+
+Mesh_1 = smesh.Mesh(platehole)
+NETGEN_1D_2D = Mesh_1.Triangle(algo=smeshBuilder.NETGEN_1D2D)
+NETGEN_2D_Parameters_1 = NETGEN_1D_2D.Parameters()
+NETGEN_2D_Parameters_1.SetMaxSize( mesh_size )
+NETGEN_2D_Parameters_1.SetMinSize( 3.13836 )
+NETGEN_2D_Parameters_1.SetSecondOrder( 0 )
+NETGEN_2D_Parameters_1.SetOptimize( 1 )
+NETGEN_2D_Parameters_1.SetFineness( 2 )
+NETGEN_2D_Parameters_1.SetChordalError( -1 )
+NETGEN_2D_Parameters_1.SetChordalErrorEnabled( 0 )
+NETGEN_2D_Parameters_1.SetUseSurfaceCurvature( 1 )
+NETGEN_2D_Parameters_1.SetFuseEdges( 1 )
+NETGEN_2D_Parameters_1.SetWorstElemMeasure( 22029 )
+NETGEN_2D_Parameters_1.SetUseDelauney( 0 )
+NETGEN_2D_Parameters_1.SetQuadAllowed( 0 )
+NETGEN_2D_Parameters_1.SetCheckChartBoundary( 64 )
+isDone = Mesh_1.Compute()
+edge_x_1 = Mesh_1.GroupOnGeom(edge_x,'edge_x',SMESH.EDGE)
+edge_y_1 = Mesh_1.GroupOnGeom(edge_y,'edge_y',SMESH.EDGE)
+load_edge_1 = Mesh_1.GroupOnGeom(load_edge,'load_edge',SMESH.EDGE)
+edge_x_2 = Mesh_1.GroupOnGeom(edge_x,'edge_x',SMESH.NODE)
+edge_y_2 = Mesh_1.GroupOnGeom(edge_y,'edge_y',SMESH.NODE)
+load_edge_2 = Mesh_1.GroupOnGeom(load_edge,'load_edge',SMESH.NODE)
+smesh.SetName(Mesh_1, 'Mesh_1')
+try:
+  Mesh_1.ExportMED(r'/home/cyprien/Desktop/plate_hole/platehole2.med',auto_groups=0,minor=40,overwrite=1,meshPart=None,autoDimension=1)
+  pass
+except:
+  print('ExportMED() failed. Invalid file name?')
+[ edge_x_1, edge_y_1, load_edge_1, edge_x_2, edge_y_2, load_edge_2 ] = Mesh_1.GetGroups()
+smesh.SetName(Mesh_1, 'Mesh_1')
+try:
+  Mesh_1.ExportMED(r'/home/cyprien/Desktop/plate_hole/plate_hole2_Files/RunCase_1/Result-Stage_1/_ExportedFromSalomeObject_0_1_2_3.med',auto_groups=0,minor=-1,overwrite=1,meshPart=None,autoDimension=1)
+  pass
+except:
+  print('ExportMED() failed. Invalid file name?')
+smesh.SetName(Mesh_1, 'Mesh_1')
+try:
+  Mesh_1.ExportMED(r'/home/cyprien/Desktop/plate_hole/plate_hole2_Files/RunCase_2/Result-Stage_1/_ExportedFromSalomeObject_0_1_2_3.med',auto_groups=0,minor=-1,overwrite=1,meshPart=None,autoDimension=1)
+  pass
+except:
+  print('ExportMED() failed. Invalid file name?')
+
+
+## Set names of Mesh objects
+smesh.SetName(NETGEN_1D_2D.GetAlgorithm(), 'NETGEN 1D-2D')
+smesh.SetName(NETGEN_2D_Parameters_1, 'NETGEN 2D Parameters_1')
+smesh.SetName(Mesh_1.GetMesh(), 'Mesh_1')
+smesh.SetName(edge_x_1, 'edge_x')
+smesh.SetName(load_edge_1, 'load_edge')
+smesh.SetName(edge_y_1, 'edge_y')
+smesh.SetName(edge_y_2, 'edge_y')
+smesh.SetName(load_edge_2, 'load_edge')
+smesh.SetName(edge_x_2, 'edge_x')
+]]></code></script>
+            <inport name="mesh_size" type="double"/>
+         </inline>
+         <inline name="asternode">
+            <script><code><![CDATA[import os, subprocess, sys
+
+export = '/home/cyprien/Desktop/plate_hole/export'
+
+appliPath = os.path.realpath('/home/cyprien/salome_meca2020/V2019.0.3_universal/tools/Code_aster_frontend-20190/bin')
+
+proc = subprocess.Popen([os.path.join(appliPath, 'as_run')] + [export], close_fds=True)
+out, err = proc.communicate()
+]]></code></script>
+         </inline>
+         <inline name="copyres_node">
+            <script><code><![CDATA[import shutil
+
+shutil.copyfile("/home/cyprien/Desktop/plate_hole/platehole.resu","/home/cyprien/Desktop/plate_hole/platehole"+str(mesh_size)+".resu")
+]]></code></script>
+            <inport name="mesh_size" type="double"/>
+         </inline>
+         <control> <fromnode>model_generation</fromnode> <tonode>asternode</tonode> </control>
+         <control> <fromnode>asternode</fromnode> <tonode>copyres_node</tonode> </control>
+      </bloc>
+   </foreach>
+   <datanode name="DataIn4">
+      <parameter name="meshsize_array" type="seqdouble">
+         <value><array><data>
+<value><double>1</double></value>
+<value><double>1.5</double></value>
+<value><double>2</double></value>
+<value><double>2.5</double></value>
+<value><double>3</double></value>
+<value><double>3.5</double></value>
+<value><double>4</double></value>
+<value><double>4.5</double></value>
+<value><double>5</double></value>
+<value><double>5.5</double></value>
+<value><double>6</double></value>
+<value><double>6.5</double></value>
+</data></array></value>
+      </parameter>
+   </datanode>
+   <inline name="write_results_txt">
+      <script><code><![CDATA[import os,sys, re
+
+mesh_sizes = []
+mesh_convergence = []
+
+for root, dirs,files in os.walk('/home/cyprien/Desktop/plate_hole/'):
+    for filename in files:
+        if (os.path.splitext(filename)[1]==".resu" and len(filename)>14):
+            print(filename)
+            
+            myfile = open(os.path.join("/home/cyprien/Desktop/plate_hole/",filename),"r")
+
+            content = myfile.read()
+            dispRegex2 = re.compile(r'LA VALEUR MAXIMALE DE VMIS     EST  {1,}(-?\d.\d{14}E-?\+?\d\d) ')
+
+            mo = os.path.splitext(filename)[0]
+            mo2 = dispRegex2.findall(content)
+            mesh_sizes.append(float(mo[9:]))
+            
+            mesh_convergence.append([float(mo[9:]),float(mo2[0])])
+            
+            myfile.close()
+            
+mesh_convergence2 = sorted(mesh_convergence, key=lambda x: x[0])
+mesh_sizes = [x[0] for x in mesh_convergence2]
+vmis_max = [x[1] for x in mesh_convergence2]
+
+results_file = open(os.path.join("/home/cyprien/Desktop/plate_hole/","mesh_convergence.txt"),"w")
+results_file.write("mesh_size,VMises(MPa)\n")
+for res in mesh_convergence2:
+    results_file.write(str(res[0])+","+str(res[1])+"\n")
+
+results_file.close()
+]]></code></script>
+      <load container="DefaultContainer"/>
+   </inline>
+   <control> <fromnode>ForEachLoop_double2</fromnode> <tonode>write_results_txt</tonode> </control>
+   <control> <fromnode>DataIn4</fromnode> <tonode>ForEachLoop_double2</tonode> </control>
+   <datalink control="false">
+      <fromnode>ForEachLoop_double2</fromnode> <fromport>evalSamples</fromport>
+      <tonode>ForEachLoop_double2.Bloc3.copyres_node</tonode> <toport>mesh_size</toport>
+   </datalink>
+   <datalink control="false">
+      <fromnode>ForEachLoop_double2</fromnode> <fromport>evalSamples</fromport>
+      <tonode>ForEachLoop_double2.Bloc3.model_generation</tonode> <toport>mesh_size</toport>
+   </datalink>
+   <datalink control="false">
+      <fromnode>DataIn4</fromnode> <fromport>meshsize_array</fromport>
+      <tonode>ForEachLoop_double2</tonode> <toport>SmplsCollection</toport>
+   </datalink>
+   <parameter>
+      <tonode>ForEachLoop_double2</tonode><toport>nbBranches</toport>
+      <value><int>1</int></value>
+   </parameter>
+   <parameter>
+      <tonode>ForEachLoop_double2.Bloc3.model_generation</tonode><toport>mesh_size</toport>
+      <value><double>3</double></value>
+   </parameter>
+   <presentation name="ForEachLoop_double2" x="102" y="166.5" width="800" height="365.5" expanded="1" expx="102" expy="166.5" expWidth="800" expHeight="365.5" shownState="0"/>
+   <presentation name="ForEachLoop_double2.Bloc3.asternode" x="300.5" y="150" width="158" height="36" expanded="1" expx="300.5" expy="150" expWidth="158" expHeight="36" shownState="0"/>
+   <presentation name="write_results_txt" x="965" y="127" width="158" height="36" expanded="1" expx="965" expy="127" expWidth="158" expHeight="36" shownState="0"/>
+   <presentation name="ForEachLoop_double2.Bloc3.copyres_node" x="501" y="175.5" width="158" height="63" expanded="1" expx="501" expy="175.5" expWidth="158" expHeight="63" shownState="0"/>
+   <presentation name="ForEachLoop_double2.Bloc3.model_generation" x="65" y="81" width="158" height="63" expanded="1" expx="65" expy="81" expWidth="158" expHeight="63" shownState="0"/>
+   <presentation name="DataIn4" x="6" y="58" width="158" height="63" expanded="1" expx="6" expy="58" expWidth="158" expHeight="63" shownState="0"/>
+   <presentation name="ForEachLoop_double2.Bloc3" x="133" y="119" width="663" height="242.5" expanded="1" expx="133" expy="119" expWidth="663" expHeight="242.5" shownState="0"/>
+   <presentation name="__ROOT__" x="0" y="0" width="1127" height="536" expanded="1" expx="0" expy="0" expWidth="1127" expHeight="536" shownState="0"/>
+</proc>
